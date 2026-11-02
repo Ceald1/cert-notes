@@ -127,6 +127,7 @@ One of the biggest and most successful open source projects to date.
 
 
 ### Distributions
-* Just like linux kubernetes has distributions
+* Just like Linux, Kubernetes has distributions
 * Common ones include; Vanilla (Kubeadm), K3S, EKS, AKS, GKE, OpenShift, and Minikube.
+
 
