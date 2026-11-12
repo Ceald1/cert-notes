@@ -71,6 +71,8 @@ One of the biggest and most successful open source projects to date.
 ![linuxfoundation, Kubernetes architecture overview section in LFS158](https://d36ai2hkxl16us.cloudfront.net/course-uploads/e0df7fbf-a057-42af-8a1f-590912be5460/bpcsp24duwc1-TrainingImage.png)
 
 ## Nodes
+* managed by kubelet and kube-proxy
+* virtual identities to associate resources with the cluster like VMs, pods, deployments, and storage classes
 ### Control
 * controls scheduling, ETCD (database of truth), controller managers and the Kube API
 * control plane nodes can be workers
@@ -130,4 +132,52 @@ One of the biggest and most successful open source projects to date.
 * Just like Linux, Kubernetes has distributions
 * Common ones include; Vanilla (Kubeadm), K3S, EKS, AKS, GKE, OpenShift, and Minikube.
 
+
+### Object model
+* object models represent components in Kubernetes such as containers, custom resources, deployments, pods, namespaces, nodes, etc.
+* Kubernetes manages the status section of objects.
+* apiVersion defines the object definition.
+* kind defines the object type or kind.
+* metadata is for names, namespace location, and annotations.
+
+#### Namespaces
+* organization of resources
+* namespaces have to be unique
+* policies such as privileged pods can be set in namespaces
+#### pods
+* smallest unit of container
+* can share IP addresses with other pods
+* pods do not have the ability to self heal
+* not persistent
+* immutable after starting
+example yaml:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    run: nginx-pod
+spec:
+  containers:
+  - name: nginx-pod
+    image: nginx:1.22.1
+    ports:
+    - containerPort: 80
+```
+#### labels
+* key value pairs associated with objects
+* used for selecting with objects such as services, service monitors, ingresses, and custom resources
+* labels don't need to be unique but just label resources
+#### label selectors
+* select labels using key value pair
+* equality based, select based on if a key is equal to a value
+* set based, select if exists, not in, not exists, in. Like regex or fuzzy like querying
+#### Replication controllers
+* ensures the number of replicas for a pod is ready at all times
+* handles life cycle of replicas
+#### Replica sets
+* the "newer" Replication controller
+* handles replicas with both equality and set based selection
+* more fault tolerant than replication controllers
 
